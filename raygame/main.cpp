@@ -10,6 +10,8 @@
 ********************************************************************************************/
 
 #include "raylib.h"
+#include "TemplateExample.h"
+#include "UnorderedList.h"
 
 int main()
 {
@@ -20,8 +22,16 @@ int main()
 
 	InitWindow(screenWidth, screenHeight, "YOTE");
 
-	SetTargetFPS(60);
+	SetTargetFPS(0);
 	//--------------------------------------------------------------------------------------
+
+	UnorderedList<int> check;
+
+	check.insertFirst(8);
+	check.insertLast(5);
+	check.insertFirst(2);
+	
+	return 0;
 
 	// Main game loop
 	while (!WindowShouldClose())    // Detect window close button or ESC key
