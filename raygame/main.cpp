@@ -9,6 +9,7 @@
 *
 ********************************************************************************************/
 
+#include <iostream>
 #include "raylib.h"
 #include "TemplateExample.h"
 #include "UnorderedList.h"
@@ -28,9 +29,10 @@ int main()
 	UnorderedList<int> check;
 
 	check.insertFirst(8);
+	check.insertFirst(10);
 	check.insertLast(5);
 	check.insertFirst(2);
-	
+
 	return 0;
 
 	// Main game loop

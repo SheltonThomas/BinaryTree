@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "Iterator.h"
 
 template<typename T>
 class List {
@@ -10,28 +11,102 @@ protected:
 	Node<T>* m_first;
 
 public:
+	void initializeList();
 	bool isListEmpty();
+	int Length();
+
 	T front();
 	T back();
+
+	virtual bool search(const T&) = 0;
 	virtual void insertFirst(const T&) = 0;
 	virtual void insertLast(const T&) = 0;
+	virtual void deleteNode(const T&) = 0;
+
+	Iterator<T> begin();
+	Iterator<T> end();
+	
+	List();
+	List(List<T>&);
+	~List();
+
+private:
+	void copyList(List<T>&);
 };
+
+template<typename T>
+void List<T>::initializeList()
+{
+	m_first = nullptr;
+	m_last = nullptr;
+	mCount = 0;
+}
 
 template<typename T>
 bool List<T>::isListEmpty()
 {
-	if (m_first == nullptr) false;
-	else true;
+	if (m_first == nullptr) return true;
+	else return false;
+}
+
+template<typename T>
+int List<T>::Length()
+{
+	return mCount;
 }
 
 template<typename T>
 T List<T>::front()
 {
-	return m_first;
+	return m_first->info;
 }
 
 template<typename T>
 T List<T>::back()
 {
-	return m_last();
+	return m_last->info;
+}
+
+template<typename T>
+Iterator<T> List<T>::begin()
+{
+	Iterator<T> iteratorBegin(m_first);
+	return iteratorBegin;
+}
+
+template<typename T>
+Iterator<T> List<T>::end()
+{
+	Iterator<T> iteratorEnd(m_last);
+	return iteratorEnd;
+}
+
+template<typename T>
+List<T>::List()
+{
+	initializeList();
+}
+
+template<typename T>
+List<T>::List(List<T>& listToInitialize)
+{
+	this->m_first = &(*listToInitialize->m_first);
+	this->m_last = &(*listToInitialize->m_last);
+	mCount = listToInitialize.Length();
+	delete listToInitialize;
+}
+
+template<typename T>
+List<T>::~List()
+{
+
+}
+
+template<typename T>
+void List<T>::copyList(List<T>& listToCopy)
+{
+	this->m_first = &(*listToCopy->m_first);
+	this->m_last = &(*listToCopy->m_last);
+	mCount = listToCopy.Length();
+	delete listToCopy;
 }
