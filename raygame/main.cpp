@@ -11,8 +11,7 @@
 
 #include <iostream>
 #include "raylib.h"
-#include "TemplateExample.h"
-#include "UnorderedList.h"
+#include "BinaryTree.h"
 
 int main()
 {
@@ -26,14 +25,9 @@ int main()
 	SetTargetFPS(0);
 	//--------------------------------------------------------------------------------------
 
-	UnorderedList<int> check;
-
-	check.insertFirst(8);
-	check.insertFirst(10);
-	check.insertLast(5);
-	check.insertFirst(2);
-
-	return 0;
+	BinaryTree tree;
+	tree.insert(5);
+	tree.insert(10);
 
 	// Main game loop
 	while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -49,7 +43,9 @@ int main()
 
 		ClearBackground(BLANK);
 
-		DrawText("BING BING BONG", 190, 200, 20, YELLOW);
+		//DrawText("BING BING BONG", 190, 200, 20, YELLOW);
+
+		tree.draw();
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------
