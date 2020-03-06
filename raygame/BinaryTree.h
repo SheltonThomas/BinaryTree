@@ -10,7 +10,7 @@ public:
 	bool isEmpty() const;
 	void insert(int a_nvValue);
 	void remove(int a_nvValue);
-	TreeNode* find(int a_nValue);
+	TreeNode* findNode(int a_nValue);
 
 	void draw(TreeNode* selected = nullptr);
 

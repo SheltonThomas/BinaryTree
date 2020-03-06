@@ -17,8 +17,8 @@ int main()
 {
 	// Initialization
 	//--------------------------------------------------------------------------------------
-	int screenWidth = 800;
-	int screenHeight = 450;
+	int screenWidth = 1280;
+	int screenHeight = 720;
 
 	InitWindow(screenWidth, screenHeight, "YOTE");
 
@@ -26,8 +26,17 @@ int main()
 	//--------------------------------------------------------------------------------------
 
 	BinaryTree tree;
+	tree.insert(15);
 	tree.insert(5);
 	tree.insert(10);
+	tree.insert(17);
+	tree.insert(21);
+	tree.insert(7);
+	tree.insert(12);
+	tree.insert(14);
+	tree.insert(17);
+
+	TreeNode* selected = tree.findNode(12);
 
 	// Main game loop
 	while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -45,7 +54,7 @@ int main()
 
 		//DrawText("BING BING BONG", 190, 200, 20, YELLOW);
 
-		tree.draw();
+		tree.draw(selected);
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------
