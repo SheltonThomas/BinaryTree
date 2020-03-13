@@ -66,13 +66,73 @@ void BinaryTree::remove(int a_nvValue)
 	if (nodeToDelete->hasRight())
 	{
 		currentNode = nodeToDelete->getRight();
+		previousNode = nodeToDelete;
+
 		while (currentNode->hasLeft())
 		{
 			previousNode = currentNode;
 			currentNode = currentNode->getLeft();
 		}
-
+		nodeToDelete->setData(currentNode->getData());
 		
+		if (currentNode == previousNode->getLeft())
+		{
+			if (currentNode->hasRight())
+			{
+				previousNode->setLeft(currentNode->getRight());
+				delete currentNode;
+			}
+			else
+			{
+				previousNode->setLeft(nullptr);
+				delete currentNode;
+			}
+		}
+
+		if (currentNode == previousNode->getRight())
+		{
+			if (currentNode->hasRight())
+			{
+				previousNode->setRight(currentNode->getRight());
+				delete currentNode;
+			}
+			else
+			{
+				previousNode->setRight(nullptr);
+				delete currentNode;
+			}
+		}
+	}
+
+	else
+	{
+		if (nodeToDelete == nodesParent->getLeft())
+		{
+			if (nodeToDelete->hasRight())
+			{
+				nodesParent->setLeft(nodeToDelete->getRight());
+				delete nodeToDelete;
+			}
+			else
+			{
+				nodesParent->setLeft(nullptr);
+				delete nodeToDelete;
+			}
+		}
+
+		if (nodeToDelete == nodesParent->getRight())
+		{
+			if (nodeToDelete->hasRight())
+			{
+				nodesParent->setRight(nodeToDelete->getRight());
+				delete nodeToDelete;
+			}
+			else
+			{
+				nodesParent->setRight(nullptr);
+				delete nodeToDelete;
+			}
+		}
 	}
 }
 
@@ -106,18 +166,19 @@ bool BinaryTree::findNode(int a_nValue, TreeNode** ppOutNode, TreeNode** ppOutPa
 		if (a_nValue < currentNode->getData())
 		{
 			previousNode = currentNode;
-			ppOutParent = &previousNode;
 			currentNode = currentNode->getLeft();
-			ppOutNode = &currentNode;
 		}
 		else if (a_nValue > currentNode->getData())
 		{
 			previousNode = currentNode;
-			ppOutParent = &previousNode;
 			currentNode = currentNode->getRight();
-			ppOutNode = &currentNode;
 		}
-		else return true;
+		else
+		{
+			*ppOutParent = previousNode;
+			*ppOutNode = currentNode;
+			return true;
+		}
 	}
 
 	return false;

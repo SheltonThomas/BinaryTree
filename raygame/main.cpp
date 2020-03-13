@@ -26,15 +26,19 @@ int main()
 	//--------------------------------------------------------------------------------------
 
 	BinaryTree tree;
-	tree.insert(15);
-	tree.insert(5);
+	tree.insert(30);
 	tree.insert(10);
 	tree.insert(17);
+	tree.insert(15);
 	tree.insert(21);
 	tree.insert(7);
 	tree.insert(12);
 	tree.insert(14);
 	tree.insert(17);
+	tree.insert(18);
+	tree.insert(25);
+
+	tree.remove(14);
 
 	TreeNode* selected = tree.findNode(12);
 
@@ -54,7 +58,7 @@ int main()
 
 		//DrawText("BING BING BONG", 190, 200, 20, YELLOW);
 
-		tree.draw(selected);
+		tree.draw();
 
 		EndDrawing();
 		//----------------------------------------------------------------------------------
